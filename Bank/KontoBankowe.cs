@@ -2,14 +2,19 @@
 {
     class KontoBankowe
     {
+        private double _saldo;
+
+        public double Saldo
+        {
+            get { return _saldo; }
+            set { _saldo = value; }
+        }
+
         private string _nrKonta;
         public string NrKonta
         {
             get { return _nrKonta; }
         }
-
-
-        private double _saldo;
 
         private string _wlasciel;
 
@@ -20,11 +25,6 @@
             _nrKonta = GeneratorLosowychLiczb(10);
 
             Console.WriteLine($"Utworzono konto dla: {_wlasciel} z numerem konta: {_nrKonta}\n");
-        }
-
-        public void Wplac(double moneta)
-        {
-            _saldo += moneta;
         }
 
         private string GeneratorLosowychLiczb(int dlugosNumeru)

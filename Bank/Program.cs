@@ -19,7 +19,7 @@ namespace Bank
             {
                 Console.Write("Wprowadz monetę do wplacenia: ");
 
-                double moneta = double.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+                string moneta = Console.ReadLine();
 
                 automat.WrzucMonete(konto, moneta);
             }

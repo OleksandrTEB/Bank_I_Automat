@@ -1,8 +1,10 @@
-﻿namespace Bank
+﻿using System.Globalization;
+
+namespace Bank
 {
     class Automat
     {
-        private List<double> _monety;
+        private readonly List<double> _monety;
 
         private int _iloscMonet;
 
@@ -23,18 +25,27 @@
             _monety.Add(5);
         }
 
-        public void WrzucMonete(KontoBankowe konto, double moneta)
+        public void WrzucMonete(KontoBankowe konto, string moneta)
         {
-            if (_monety.Contains(moneta))
+            bool result = double.TryParse(moneta, out double zparsowanaMoneta);
+
+            if (result)
             {
-                Console.WriteLine($"Wplacono: {moneta}, Na konto znumerem: {konto.NrKonta}\n");
-                konto.Wplac(moneta);
-                _iloscMonet++;
-                konto.StanKonta(_iloscMonet);
+                if (_monety.Contains(zparsowanaMoneta))
+                {
+                    Console.WriteLine($"Wplacono: {moneta}, Na konto znumerem: {konto.NrKonta}\n");
+                    konto.Saldo += zparsowanaMoneta;
+                    _iloscMonet++;
+                    konto.StanKonta(_iloscMonet);
+                }
+                else
+                {
+                    Console.WriteLine("Takiej monety nie istnieje.");
+                }
             }
             else
             {
-                Console.WriteLine("Takiej monety nie istnieje.");
+                Console.WriteLine("Wprowadzono niepoprany format!\n");
             }
         }
     }
